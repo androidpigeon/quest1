@@ -1,10 +1,12 @@
 package com.example.quest1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
@@ -30,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < 10; i++) {
                 try {
-                    sleep(1000);
                     final long startTime = System.nanoTime();
+                    sleep(new Random().nextInt(500)+1);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            textView.setText(textView.getText().toString() + id + ":" + TimeUnit.MICROSECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) + "\n");
+                            textView.setText(textView.getText().toString() + id + ":" + TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) + "\n");
                         }
                     });
                 } catch (InterruptedException e) {
